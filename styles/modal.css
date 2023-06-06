@@ -9,6 +9,7 @@
     align-content: center;
 }
 
+/* div child of modal */
 #modal>div{
     position: absolute;
     top: 20vh;
