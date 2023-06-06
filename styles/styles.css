@@ -22,3 +22,21 @@
     right: 0;
     text-align: center;
 }
+
+#flex-cols2{
+    display: flex;
+}
+
+#svg-container{
+    flex-grow: 1;
+    text-align: center;
+}
+
+#form-container{
+    overflow-y: auto;
+    text-align: center;
+}
+
+.small-number{
+    width: 70px;
+}
