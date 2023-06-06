@@ -17,6 +17,29 @@ deleteModal();*/
 
 }*/
 
+// kind of class --- JS5
+// call by doing titi = new Modal()
+// titi.showModal('<h1>gna gna</h1>','tatatatatatatatatat');
+/*function Modal() {
+
+    //def variable & functions
+    // everything private by default
+
+
+    function initContext(){
+        document.addEventListener( 'DOMContentLoaded', (evt)=>{
+          
+            modalNode = document.querySelector('#modal');
+            deleteModal();
+        });
+    }
+
+    // expose function
+    this.show = showModal;
+
+    initContext();
+}*/
+
 //// --------------------
 let modalNode = undefined;
 
@@ -82,12 +105,4 @@ document.addEventListener( 'DOMContentLoaded', (evt)=>{
     //show modal
     showModal( '<h2>HEY</h2>', 'bla bla bla bla bla');
 });
-
-
-
-
-
-
-
-
 
