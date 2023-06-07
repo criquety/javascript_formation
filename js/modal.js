@@ -265,13 +265,70 @@ class MessageBox extends Modal{
 }
 
 
+class ConfirmBox extends Modal{
+
+    #okButton;
+    #okCallback;
+
+    #cancelButton;
+    #cancelCallback;
+
+    constructor( okFunc, cancelFunc){
+        console.log( '----- class ConfirmBox Constructor call -----');
+
+        super();
+        this.okCallback = okFunc; // not call to variable but to setter
+        this.cancelCallback = cancelFunc; // not call to variable but to setter
+
+        this.#okButton = document.createElement('button');
+        this.#okButton.className="btn btn-primary";
+        this.#okButton.innerHTML='OK';
+        this.#okButton.type='button';
+        this.#okButton.addEventListener('click', ()=>this.#okCallback()); // Need to add a function here to have a defined template but potentially a different content
+
+
+        this.#cancelButton = document.createElement('button');
+        this.#cancelButton.className="btn btn-warning";
+        this.#cancelButton.innerHTML='CANCEL';
+        this.#cancelButton.type='button';
+        this.#cancelButton.addEventListener('click', ()=>this.#cancelCallback()); // Need to add a function here to have a defined template but potentially a different content
+
+        // Append buttons to Modal
+        this.setButtons([this.#okButton, this.#cancelButton]);
+    }
+
+    set okCallback(fn){
+        if( typeof fn === 'function'){
+            this.#okCallback = fn;
+        }
+    }
+
+    set cancelCallback(fn){
+        if( typeof fn === 'function'){
+            this.#cancelCallback = fn;
+        }
+    }
+
+
+    showConfirmBox=( title, content, okFunc, cancelFunc)=>{
+        this.okCallback = okFunc;
+        this.cancelCallback = cancelFunc;
+        this.showModal( title, content);        
+    }
+}
+
+
+
 
 ////////////////////////////////
-const modalOK = new MessageBox( ()=> {console.log( "--------------- button callback test ----------- ");});
+//const modalOK = new MessageBox( ()=> {console.log( "--------------- button callback test ----------- ");});
+
+const modalConfirm = new ConfirmBox( ()=> {console.log( "CallBack OK");}, ()=> {console.log( "CallBack Cancel");});
 
 document.addEventListener( 'DOMContentLoaded', (evt)=>{
 
-    modalOK.showMessageBox( '<h2>HEY</h2>', 'bla bla bla bla bla', ()=> {console.log( "--------------- button callback test2 ----------- ");});
+    //modalOK.showMessageBox( '<h2>HEY</h2>', 'bla bla bla bla bla', ()=> {console.log( "--------------- button callback test2 ----------- ");});
+    modalConfirm.showConfirmBox( '<h2>HEY</h2>', 'bla bla bla bla bla', ()=> {console.log( "CallBack OK 2");}, ()=> {console.log( "CallBack Cancel 2");});
 });
 
 
