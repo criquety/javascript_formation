@@ -1,5 +1,5 @@
 // NOTE:
-// JS5
+// ES5
 /*function deleteModal(){
 
     //var modal = document.querySelector('#modal').remove();
@@ -8,7 +8,7 @@
     console.log(arguments); // Note: log all arguments even if you provide more arguments than the one requested.
 }
 deleteModal();*/
-// JS6
+// ES6
 // NOTE: difference between var & let: var is a global variable accessible in memory via document, let restreint accessiblity to the file
 // var modal or let modal
 /*const deleteModal=()=>{
@@ -17,13 +17,14 @@ deleteModal();*/
 
 }*/
 
-// kind of class --- JS5
+// kind of class --- ES5
 // call by doing titi = new Modal()
 // titi.showModal('<h1>gna gna</h1>','tatatatatatatatatat');
 /*function Modal() {
 
     //def variable & functions
-    // everything private by default
+    var mdl = undefined;
+    // everything private by default (var & functions)
 
 
     function initContext(){
@@ -40,14 +41,14 @@ deleteModal();*/
     initContext();
 }*/
 
-//// --------------------
-let modalNode = undefined;
+//// ES6 --------------------
+//let modalNode = undefined;
 
 
 /**
  * Delete modal pop up from Document
  */
-const deleteModal=()=>{
+/*const deleteModal=()=>{
 
     if( modalNode !== undefined){
         modalNode.remove();
@@ -64,7 +65,7 @@ const deleteModal=()=>{
  * @param {string} title title of pop up
  * @param {string} content content of pop up
  */
-const showModal=( title, content)=>{
+/*const showModal=( title, content)=>{
 
     // check that modal node is not already in the page
     if( null === document.querySelector('#modal'))
@@ -104,5 +105,91 @@ document.addEventListener( 'DOMContentLoaded', (evt)=>{
 
     //show modal
     showModal( '<h2>HEY</h2>', 'bla bla bla bla bla');
+});*/
+
+
+// ----- ES6 Class 
+// ";" not mandatory on ES6, return considered as ";", need to be careful not to split line or add ``
+
+class Modal{
+
+    // public by default, to reference as private, add a #
+    #refId
+    #modalNode
+
+    constructor( idModal="modal"){
+        console.log( '----- class Modal Constructor call -----');
+
+        this.#refId=idModal;
+
+        document.addEventListener( 'DOMContentLoaded', (evt)=>{
+          
+            //this.modalNode = document.querySelector('#' + this.refId); // ES5
+            this.#modalNode = document.querySelector(`#${this.#refId}`); //ES6
+     
+            this.#deleteModal();
+        });
+
+    }
+
+    /**
+     * Delete modal pop up from Document
+     */
+    #deleteModal=()=>{
+
+        if( this.#modalNode !== undefined){
+            this.#modalNode.remove();
+
+            console.log( 'modalNode removed');
+        } else {
+            console.error('No modal pop up defined');
+        }
+    }
+
+    /**
+     * Show a modal pop up on a page, if pop up not already defined in the page
+     * @param {string} title title of pop up
+     * @param {string} content content of pop up
+     */
+    showModal=( title, content)=>{
+
+        // check that modal node is not already in the page
+        if( null === document.querySelector(`#${this.refId}`)){
+            if( this.#modalNode !== undefined){
+                
+                // update pop up content
+                if( undefined !== title) {
+                    this.#modalNode.querySelector(`#${this.#refId}-title`).innerHTML = title;
+                }
+
+                if( undefined !== content) {
+                    this.#modalNode.querySelector(`#${this.#refId}-content`).innerHTML = content;
+                }
+
+                // display pop up
+                document.body.appendChild( this.#modalNode);
+                console.log( 'show modal');
+            }
+        }
+        else{
+            console.error('modal pop up already displayed');
+        }
+    }
+}
+
+
+
+const modal = new Modal('modal');
+
+
+document.addEventListener( 'DOMContentLoaded', (evt)=>{
+    
+    console.log('--- Log new object created:');
+    console.log(modal);
+
+    modal.showModal( '<h2>HEY</h2>', 'bla bla bla bla bla');
 });
+
+
+
 
