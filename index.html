@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="/styles/styles.css">
     <link rel="stylesheet" href="/styles/modal.css">
-    <script src="/js/index.js"></script>
+    <script src="/js/index.js" type="module"></script> <!-- type = module => isolate content -->
 
 </head>
 <body>
@@ -143,22 +143,5 @@
         </div>
         <div id="footer">footer</div>
     </div>
-
-    <!-- ----------------  Modal => to replace classic pop-up ----------------->
-    <!--<div id="modal">
-        <div>
-            <div id="modal-title"><h3>title</h3></div>
-            <div id="modal-content">content</div>
-            <div id="modal-button">
-                <button type="button" class="btn btn-primary">OK</button>
-            </div>
-        </div>
-    </div>-->
-
-
-    <!--  Possible load the script after the DOM loading  // improve ux, html loaded, and in the js script we have access to DOM content -->
-    <script src="/js/config.js"></script>
-    <script src="/js/modal.js"></script>
-    <script src="/js/meme.js"></script>
 </body>
 </html>

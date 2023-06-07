@@ -230,7 +230,7 @@ class Modal{
     }
 }
 
-class MessageBox extends Modal{
+export class MessageBox extends Modal{
 
     #okCallback;
     #okButton;
@@ -265,7 +265,7 @@ class MessageBox extends Modal{
 }
 
 
-class ConfirmBox extends Modal{
+export class ConfirmBox extends Modal{
 
     #okButton;
     #okCallback;
@@ -329,13 +329,13 @@ class ConfirmBox extends Modal{
 ////////////////////////////////
 //const modalOK = new MessageBox( ()=> {console.log( "--------------- button callback test ----------- ");});
 
-const modalConfirm = new ConfirmBox( ()=> {console.log( "CallBack OK");}, ()=> {console.log( "CallBack Cancel");});
+/*const modalConfirm = new ConfirmBox( ()=> {console.log( "CallBack OK");}, ()=> {console.log( "CallBack Cancel");});
 
 document.addEventListener( 'DOMContentLoaded', (evt)=>{
 
     //modalOK.showMessageBox( '<h2>HEY</h2>', 'bla bla bla bla bla', ()=> {console.log( "--------------- button callback test2 ----------- ");});
     modalConfirm.showConfirmBox( '<h2>HEY</h2>', 'bla bla bla bla bla', ()=> {console.log( "CallBack OK 2");}, ()=> {console.log( "CallBack Cancel 2");});
-});
+});*/
 
 
 

@@ -1,4 +1,10 @@
-class Meme {
+import {REST_ADDR} from "./config.js"
+
+//import config from "./config.js"
+// then use config.REST_ADDR
+
+
+export class Meme {
 
     title = ""; //string
     text = ""; // string
@@ -21,7 +27,7 @@ class Meme {
 }
 
 
-class Memes extends Array {
+export class Memes extends Array {
 
     static resourcesName = '/memes'
     constructor(){
@@ -63,5 +69,5 @@ class Memes extends Array {
 
 
 
-const memesList = new Memes();
-memesList.load(); // TEMP
+/*const memesList = new Memes();
+memesList.load(); // TEMP*/
