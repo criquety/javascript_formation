@@ -284,14 +284,20 @@ class ConfirmBox extends Modal{
         this.#okButton.className="btn btn-primary";
         this.#okButton.innerHTML='OK';
         this.#okButton.type='button';
-        this.#okButton.addEventListener('click', ()=>this.#okCallback()); // Need to add a function here to have a defined template but potentially a different content
+
+        this.#okButton.addEventListener('click', ()=>{
+            if(typeof this.#okCallback === 'function') { this.#okCallback()}
+        }); // Need to add a function here to have a defined template but potentially a different content
 
 
         this.#cancelButton = document.createElement('button');
         this.#cancelButton.className="btn btn-warning";
         this.#cancelButton.innerHTML='CANCEL';
         this.#cancelButton.type='button';
-        this.#cancelButton.addEventListener('click', ()=>this.#cancelCallback()); // Need to add a function here to have a defined template but potentially a different content
+        
+        this.#cancelButton.addEventListener('click', ()=>{
+            if(typeof this.#cancelCallback === 'function') { this.#cancelCallback()}
+        }); // Need to add a function here to have a defined template but potentially a different content
 
         // Append buttons to Modal
         this.setButtons([this.#okButton, this.#cancelButton]);
