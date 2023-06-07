@@ -6,6 +6,8 @@ import {REST_ADDR} from "./config.js"
 
 export class Meme {
 
+    static resourceName = '/memes'
+
     title = ""; //string
     text = ""; // string
     x = 0; //number
@@ -19,10 +21,27 @@ export class Meme {
     frameSizeX = 0; //number
     frameSizeY = 0; //number
 
+    #fullResourceName = ""
+
     constructor(){}
 
-    save=()=>{}
 
+    get #fullResourceName(){
+
+        return `${undefined !== this.id ? Meme.resourceName + '/' + this.id : Meme.resourceName}`
+    }
+
+    save=()=>{
+
+        return fetch( `${REST_ADDR}${this.#fullResourceName}`, {
+            method: undefined !== this.id ? 'PUT' : 'POST',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify(this)
+        })
+    }
+    
     deserialize=( jsonData)=>{}
 }
 
