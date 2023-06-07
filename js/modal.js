@@ -118,7 +118,8 @@ document.addEventListener( 'DOMContentLoaded', (evt)=>{
         });*/
 
 // ";" not mandatory on ES6, return considered as ";", need to be careful not to split line or add ``
-
+// Note: au moment d'un set du innerHTML, cela reconstruit le DOM du noeud. Attention les events sont liés au DOM, donc si les events ont été créé avant, on perd tout.
+// l'utilisation du appendChild n'enclenche pas la reconstruction du DOM. 
 
 
 
@@ -189,6 +190,19 @@ class Modal{
         }
         else{
             console.error('modal pop up already displayed');
+        }
+    }
+
+    // not a function, called modal.modalID and not modal.modalID()
+    get modalID(){
+        return this.#refId;
+    }
+
+    // not a function, called modal.modalID = 'titi' and not modal.modalID('titi')
+    set modalID(value){
+        if( value.length>0){
+            this.#refId = value;
+            this.#modalNode.id = this.#refId;
         }
     }
 }
