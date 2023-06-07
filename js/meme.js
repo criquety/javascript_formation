@@ -26,7 +26,7 @@ export class Meme {
     constructor(){}
 
 
-    get #fullResourceName(){
+    get fullResourceName(){
 
         return `${undefined !== this.id ? Meme.resourceName + '/' + this.id : Meme.resourceName}`
     }
@@ -40,8 +40,12 @@ export class Meme {
             },
             body: JSON.stringify(this)
         })
+        .then( response=>response.json())
+        .then( data => {
+            this.id = data.id;
+        })
     }
-    
+
     deserialize=( jsonData)=>{}
 }
 
