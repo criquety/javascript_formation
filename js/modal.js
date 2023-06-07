@@ -122,7 +122,9 @@ document.addEventListener( 'DOMContentLoaded', (evt)=>{
 // l'utilisation du appendChild n'enclenche pas la reconstruction du DOM. 
 
 
-
+/**
+ * modal without closing button
+ */
 class Modal{
 
     // public by default, to reference as private, add a #
@@ -193,6 +195,27 @@ class Modal{
         }
     }
 
+    /**
+     * set buttons content
+     * @param {Array<HTMLElement>} buttonArray list of Buttons to add to modal, Events already setup
+     */
+    setButtons=( buttonArray)=>{
+
+        // clean existing buttons
+        this.#modalNode.querySelector('#modal-button').innerHTML='';
+
+        buttonArray.forEach((it, i, list)=>{
+            this.#modalNode.querySelector('#modal-button').appendChild( it);
+            it.addEventListener('click', this.#deleteModal);
+        })
+
+        /*for( let i = 0; i < buttonArray.length; i++){
+            this.#modalNode.querySelector('#modal-button').appendChild( buttonArray[i]);
+        }*/
+
+        //this.#modalNode.querySelector('#modal-button').appendChild( ...buttonArray);
+    }
+
     // not a function, called modal.modalID and not modal.modalID()
     get modalID(){
         return this.#refId;
@@ -207,14 +230,48 @@ class Modal{
     }
 }
 
+class MessageBox extends Modal{
+
+    #okCallback;
+    #okButton;
+
+    constructor( okFunc){
+        console.log( '----- class MessageBox Constructor call -----');
+
+        super();
+        this.okCallback = okFunc; // not call to variable but to setter
+
+        this.#okButton = document.createElement('button');
+        this.#okButton.className="btn btn-primary";
+        this.#okButton.innerHTML='OK';
+        this.#okButton.type='button';
+        this.#okButton.addEventListener('click', ()=>this.#okCallback()); // Need to add a function here to have a defined template but potentially a different content
+
+        // Append button to Modal
+        this.setButtons([this.#okButton]);
+    }
+
+    set okCallback(fn){
+        if( typeof fn === 'function'){
+            this.#okCallback = fn;
+        }
+    }
 
 
-const modal = new Modal('modal');
+    showMessageBox=( title, content, okFunc)=>{
+        this.okCallback = okFunc;
+        this.showModal( title, content);        
+    }
+}
 
+
+
+////////////////////////////////
+const modalOK = new MessageBox( ()=> {console.log( "--------------- button callback test ----------- ");});
 
 document.addEventListener( 'DOMContentLoaded', (evt)=>{
-   
-    modal.showModal( '<h2>HEY</h2>', 'bla bla bla bla bla');
+
+    modalOK.showMessageBox( '<h2>HEY</h2>', 'bla bla bla bla bla', ()=> {console.log( "--------------- button callback test2 ----------- ");});
 });
 
 
