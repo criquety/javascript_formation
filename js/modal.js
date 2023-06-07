@@ -107,9 +107,20 @@ document.addEventListener( 'DOMContentLoaded', (evt)=>{
     showModal( '<h2>HEY</h2>', 'bla bla bla bla bla');
 });*/
 
+// ----- ------- ES6 Class 
+/// temp query selector to retrieve doc content
+       /* document.addEventListener( 'DOMContentLoaded', (evt)=>{
+          
+            //this.modalNode = document.querySelector('#' + this.refId); // ES5
+            this.#modalNode = document.querySelector(`#${this.#refId}`); //ES6
+     
+            this.#deleteModal();
+        });*/
 
-// ----- ES6 Class 
 // ";" not mandatory on ES6, return considered as ";", need to be careful not to split line or add ``
+
+
+
 
 class Modal{
 
@@ -117,19 +128,24 @@ class Modal{
     #refId
     #modalNode
 
+    #modalTemplateString='\
+        <div>\
+            <div id="modal-title"><h3>title</h3></div>\
+            <div id="modal-content">content</div>\
+            <div id="modal-button"></div>\
+        </div>'
+
     constructor( idModal="modal"){
         console.log( '----- class Modal Constructor call -----');
 
         this.#refId=idModal;
 
-        document.addEventListener( 'DOMContentLoaded', (evt)=>{
-          
-            //this.modalNode = document.querySelector('#' + this.refId); // ES5
-            this.#modalNode = document.querySelector(`#${this.#refId}`); //ES6
-     
-            this.#deleteModal();
-        });
+        this.#modalNode = document.createElement('div')
+        this.#modalNode.id = this.#refId
+        this.#modalNode.innerHTML = this.#modalTemplateString
 
+        /*const dom = new DOMParser();
+        dom.parseFromString(this.#modalTemplateString, 'text/html');*/
     }
 
     /**
@@ -183,10 +199,7 @@ const modal = new Modal('modal');
 
 
 document.addEventListener( 'DOMContentLoaded', (evt)=>{
-    
-    console.log('--- Log new object created:');
-    console.log(modal);
-
+   
     modal.showModal( '<h2>HEY</h2>', 'bla bla bla bla bla');
 });
 
