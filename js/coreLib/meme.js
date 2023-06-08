@@ -1,4 +1,4 @@
-import {REST_ADDR} from "./config.js"
+import {REST_ADDR} from "../config/config.js"
 
 //import config from "./config.js"
 // then use config.REST_ADDR
