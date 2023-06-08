@@ -22,10 +22,9 @@ class MemesDOM {
             this.initNavBarLinks();
 
             // initialize main wrapper content according to current url
-            router.manageRoute();
-
             Promise.all( [this.imagesList.load(), this.memesList.load()] )
                 .then( prValues=>{
+                    router.manageRoute();
                     return prValues;
                 })
         });
