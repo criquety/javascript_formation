@@ -1,3 +1,5 @@
+import { memesList, imagesList } from "./coreLib/dataInst.js";
+
 
 const routes= [
     {
@@ -10,7 +12,12 @@ const routes= [
         name: 'thumb',
         pathName: '/thumbnail',
         viewUrl: '/views/thumbnail.html',
-        pathRegex: /^\/thumbnail\/?$/
+        pathRegex: /^\/thumbnail\/?$/,
+        data:
+        { 
+            memes: memesList,
+            images: imagesList
+        }
     },
     {
         name: 'home',
@@ -39,7 +46,7 @@ export class RouterDOM{
     }
 
     /***
-     * 
+     * According to current URL, find if a corresponding route is defined, and load corresponding view
      */
     manageRoute=()=>{
 
@@ -65,9 +72,8 @@ export class RouterDOM{
         else {
             console.log("Route found" + this.#currentRoute.pathName);
 
-            const templateText = sessionStorage.getItem( this.#currentRoute.name);
-            if (null !== templateText) {
-                this.#wrapTemplate( templateText);
+            if (undefined !== this.#currentRoute.templateText) {
+                this.#wrapTemplate( this.#currentRoute);
             }
             else{
                 this.#loadTemplate( this.#currentRoute);
@@ -84,8 +90,9 @@ export class RouterDOM{
             .then( f=>f.text())
             .then( text=>{
 
-                sessionStorage.setItem( route.name, text);
-                this.#wrapTemplate(text);
+                // store template html content into the route const
+                route.templateText = text;
+                this.#wrapTemplate( route);
             })
     }
 
@@ -93,10 +100,10 @@ export class RouterDOM{
      * Assign html template content to main-wrapper (in index.html)
      * @param { string} text: template html content 
      */
-    #wrapTemplate=( text)=>{
+    #wrapTemplate=( route)=>{
 
         const wrapper = document.querySelector('#main-wrapper');
-        wrapper.innerHTML = text;
+        wrapper.innerHTML = route.templateText;
     }
 
 }
