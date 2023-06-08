@@ -22,8 +22,12 @@ export class DataFiller{
             const toExec = m.groups.js;
             const execResult = eval( toExec); // execute the js code extracted from the template
 
-            if( typeof execResult !== 'object' || typeof execResult !== 'function'){
+            if( typeof execResult !== 'object' && typeof execResult !== 'function'){
                 templateText = templateText.replace( m[0], execResult);
+            }
+            else if( Array.isArray( execResult)) {
+
+                templateText = templateText.replace( m[0], execResult.join(''));
             }
         }
 
