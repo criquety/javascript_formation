@@ -21,11 +21,11 @@ class MemesDOM {
     
             this.initNavBarLinks();
 
+            // initialize main wrapper content according to current url
+            router.manageRoute();
+
             Promise.all( [this.imagesList.load(), this.memesList.load()] )
                 .then( prValues=>{
-
-
-
                     return prValues;
                 })
         });
@@ -37,9 +37,7 @@ class MemesDOM {
             link.addEventListener('click', (evt)=>{
 
                 evt.preventDefault();
-                router.currentRoute= '/';  
-                
-                router.manageRoute();
+                router.currentRoute= '/';
             })
         })
 
@@ -48,8 +46,6 @@ class MemesDOM {
 
                 evt.preventDefault();
                 router.currentRoute= '/meme';  
-                
-                router.manageRoute();
             })
         })
 
@@ -58,8 +54,6 @@ class MemesDOM {
 
                 evt.preventDefault();
                 router.currentRoute= '/thumbnail';
-                
-                router.manageRoute();
             })
         })
     }
