@@ -83,7 +83,7 @@ export class Memes extends Array {
                     // assignation of item data in Meme object created
                     const meme = new Meme();
                     Object.assign( meme, item);
-                    this.push( Object.freeze(meme));
+                    this.push( Object.seal(meme));
                 });
                 return arr;
             });    
