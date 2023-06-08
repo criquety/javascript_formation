@@ -10,8 +10,8 @@
 
 export class DataFiller{
 
-    static filterHTMLRegex = /(?<js>(?<=\{\{).*?(?=\}\}))/gm
-    //static filterHTMLRegex = /{{(?<js>([<>\w\d'"!?:\[\];,=().*\/+-])*|^({{2,})|^(}{2,}))}}/gm
+    //static filterHTMLRegex = /(?<js>(?<=\{\{).*?(?=\}\}))/gm
+    static filterHTMLRegex = /{{(?<js>([<>\w\d'"!?:\[\];,=().*\/+-])*|^({{2,})|^(}{2,}))}}/gm
 
     static fillView=( data, templateText)=>{
 
