@@ -24,6 +24,11 @@ const routes= [
         pathName: '/',
         viewUrl: '/views/home.html',
         pathRegex: /^\/?(home)?\/?$/
+    },
+    {
+        name: '404',
+        pathRegex: /404/,
+        templateText: '<h1>No Content Available Here.</h1><hr/><h3>Error 404 - NOT FOUND</h3>'
     }
 ]
 
@@ -68,6 +73,7 @@ export class RouterDOM{
         if( this.#currentRoute === undefined) {
 
             console.error("No route found");
+            this.currentRoute = '/404'
         }
         else {
             console.log("Route found" + this.#currentRoute.pathName);
