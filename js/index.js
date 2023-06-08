@@ -37,7 +37,9 @@ class MemesDOM {
             link.addEventListener('click', (evt)=>{
 
                 evt.preventDefault();
-                router.currentRoute= '/';                
+                router.currentRoute= '/';  
+                
+                router.manageRoute();
             })
         })
 
@@ -45,7 +47,9 @@ class MemesDOM {
             link.addEventListener('click', (evt)=>{
 
                 evt.preventDefault();
-                router.currentRoute= '/meme';                
+                router.currentRoute= '/meme';  
+                
+                router.manageRoute();
             })
         })
 
@@ -53,7 +57,9 @@ class MemesDOM {
             link.addEventListener('click', (evt)=>{
 
                 evt.preventDefault();
-                router.currentRoute= '/thumbnail';                
+                router.currentRoute= '/thumbnail';
+                
+                router.manageRoute();
             })
         })
     }
