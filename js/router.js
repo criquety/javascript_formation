@@ -1,8 +1,21 @@
 
-const routes={
-    thumbnail: '/thumbnail',
-    home: '/'
-}
+const routes= [
+    {
+        pathName: '/meme',
+        viewUrl: '/views/editor.html',
+        pathRegex: /^\/meme(\/(?<id>\d{0,})?)?\/?$/ //extract number in patch into id group. example: /meme/125/ => id = 125
+    },
+    {
+        pathName: '/thumbnail',
+        viewUrl: '/views/thumbnail.html',
+        pathRegex: /^\/thumbnail\/?$/
+    },
+    {
+        pathName: '/',
+        viewUrl: '/views/home.html',
+        pathRegex: /^\/(home)?\/?$/
+    }
+]
 
 
 export class RouterDOM{
@@ -21,6 +34,12 @@ export class RouterDOM{
 
     manageRoute=()=>{
 
+        let routeID = 0;
+        let routeFound = false;
+
+        do{
+
+        }while(!routeFound && routeID < routes.length)
 
     }
 }
