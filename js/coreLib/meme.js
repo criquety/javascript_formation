@@ -78,7 +78,7 @@ export class Memes extends Array {
             .then(arr=>{
 
                 arr.forEach(item=>{  
-                    console.log(item);
+                    //console.log(item);
 
                     // assignation of item data in Meme object created
                     const meme = new Meme();

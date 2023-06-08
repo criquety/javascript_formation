@@ -56,7 +56,7 @@ export class Images extends Array {
             .then(arr=>{
 
                 arr.forEach(item=>{  
-                    console.log(item);
+                    //console.log(item);
                     this.push( Object.seal(item));
                 });
                 return arr;
