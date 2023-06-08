@@ -26,6 +26,8 @@ class MemesDOM {
     }
 }
 
+const memesDOM = new MemesDOM();
+
 
 
 
