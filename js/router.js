@@ -1,5 +1,5 @@
 import { memesList, imagesList } from "./coreLib/dataInst.js";
-
+import { DataFiller } from "./coreLib/dataFiller.js"
 
 const routes= [
     {
@@ -109,7 +109,11 @@ export class RouterDOM{
     #wrapTemplate=( route)=>{
 
         const wrapper = document.querySelector('#main-wrapper');
-        wrapper.innerHTML = route.templateText;
+
+        const resultsFilled = DataFiller.fillView( route.data, route.templateText+'');
+        wrapper.innerHTML = resultsFilled;
+
+        //wrapper.innerHTML = route.templateText;
     }
 
 }
