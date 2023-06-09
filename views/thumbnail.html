@@ -1,7 +1,33 @@
-<div>
-    <h2>voici le debug JSON</h2>
-    {{JSON.stringify(data.memes)}}
-    <hr/>
-    voici la liste visuel des svg
-    {{data.memes.map(e=>'<div>Hello</div>')}}
-</div>
+<style type="text/css">
+    #meme-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: space-between;
+    }
+    #meme-list > a  {
+      height: 100%;
+      
+    }
+    #meme-list > a > div {
+      height: 300px;
+      max-width: 25vw;
+    }
+  </style>
+  <div>
+    <h3>Memes List</h3>
+    <div id="meme-list">
+      <div id="meme-model">
+        <a href="/memes/">
+          <svg
+            viewBox="0 0 1000 1000"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <image xlink:href="" x="0" y="0"/>
+            <text x="0" y="20" font-size="20" font-weight="500"></text>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>

@@ -1,43 +1,14 @@
-import { memesList, imagesList } from "./coreLib/dataInst.js";
-import { DataFiller } from "./coreLib/dataFiller.js"
-
-const routes= [
-    {
-        name: 'editor',
-        pathName: '/meme',
-        viewUrl: '/views/editor.html',
-        pathRegex: /^\/meme(\/(?<id>\d{0,})?)?\/?$/ //extract number in patch into id group. example: /meme/125/ => id = 125
-    },
-    {
-        name: 'thumb',
-        pathName: '/thumbnail',
-        viewUrl: '/views/thumbnail.html',
-        pathRegex: /^\/thumbnail\/?$/,
-        data:
-        { 
-            memes: memesList,
-            images: imagesList
-        }
-    },
-    {
-        name: 'home',
-        pathName: '/',
-        viewUrl: '/views/home.html',
-        pathRegex: /^\/?(home)?\/?$/
-    },
-    {
-        name: '404',
-        pathRegex: /404/,
-        templateText: '<h1>No Content Available Here.</h1><hr/><h3>Error 404 - NOT FOUND</h3>'
-    }
-]
-
+import { routes } from "../config/routeConfig.js"
 
 export class RouterDOM{
 
+    static get viewWrapper() {
+        return document.querySelector("#main-wrapper");
+    }
+
     #currentUrl;
     #currentRoute; 
-    currentParams;
+    #currentParams;
 
     // Note: not the setter of currentPath, just a way to call it like item.innerHTML = XXX, different from function call
     set currentRoute( url){
@@ -56,13 +27,14 @@ export class RouterDOM{
     manageRoute=()=>{
 
         this.#currentUrl = window.location.pathname;
-
+        this.#currentParams = {};
+        
         this.#currentRoute = routes.find(elmt=>{
 
             const m = elmt.pathRegex.exec( this.#currentUrl);
 
             if( m !== null){
-                this.currentParams = m.groups;
+                this.#currentParams = undefined !== m.groups ? m.groups : {};
                 return true;
             }
             else {
@@ -73,47 +45,55 @@ export class RouterDOM{
         if( this.#currentRoute === undefined) {
 
             console.error("No route found");
-            this.currentRoute = '/404'
+            this.currentRoute = '/404';
+            return false;
         }
         else {
             console.log("Route found" + this.#currentRoute.pathName);
 
             if (undefined !== this.#currentRoute.templateText) {
-                this.#wrapTemplate( this.#currentRoute);
+                this.#wrapTemplate();
             }
             else{
-                this.#loadTemplate( this.#currentRoute);
+                this.#loadTemplate();
             }
         }
     }
 
     /***
-     * Load html view attached to a route
+     * Load html view attached to this.#currentRoute
      */
-    #loadTemplate=( route)=>{
+    #loadTemplate=()=>{
 
-        fetch( route.viewUrl)
+        fetch( this.#currentRoute.viewUrl)
             .then( f=>f.text())
             .then( text=>{
 
                 // store template html content into the route const
-                route.templateText = text;
-                this.#wrapTemplate( route);
+                this.#currentRoute.templateText = text;
+                this.#wrapTemplate();
             })
     }
 
     /**
-     * Assign html template content to main-wrapper (in index.html)
-     * @param { string} text: template html content 
+     * Assign html template content from this.#currentRoute to main-wrapper (in index.html)
      */
-    #wrapTemplate=( route)=>{
+    #wrapTemplate=()=>{
 
-        const wrapper = document.querySelector('#main-wrapper');
+        RouterDOM.viewWrapper.innerHTML = this.#currentRoute.templateText;
 
-        const resultsFilled = DataFiller.fillView( route.data, route.templateText+'');
-        wrapper.innerHTML = resultsFilled;
+        if( undefined !== this.#currentRoute.controller) {
+            this.#currentRoute.controller.wrapper = RouterDOM.viewWrapper;
+            this.#currentRoute.controller.params = this.#currentParams; // not defined for thumbnail controller, provide the possiblity for controller having params defined
+            this.refresh();
+        }
+    }
 
-        //wrapper.innerHTML = route.templateText;
+    refresh=()=>{
+
+        if( undefined !== this.#currentRoute.controller) {
+            this.#currentRoute.controller.refresh();
+        }
     }
 
 }

@@ -1,7 +1,7 @@
 import { MessageBox, ConfirmBox } from "./webComponents/modal.js";
 import { Memes } from "./coreLib/meme.js";
 import { Images } from "./coreLib/image.js"
-import { RouterDOM} from './router.js'
+import { RouterDOM} from './coreLib/router.js'
 import { memesList, imagesList } from "./coreLib/dataInst.js";
 
 //const modalConfirm = new ConfirmBox( ()=> {console.log( "CallBack OK");}, ()=> {console.log( "CallBack Cancel");});
