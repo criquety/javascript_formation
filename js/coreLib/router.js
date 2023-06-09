@@ -96,8 +96,16 @@ export class RouterDOM{
         }
     }
 
+    removeActiveNavbarLink=()=>{
+        document.querySelectorAll('nav .active').forEach( e=>{
+          e.classList.remove('active')
+        })      
+    }
+
 }
 
+const router = new RouterDOM();
+export default  router;
 
 
 // NOTE

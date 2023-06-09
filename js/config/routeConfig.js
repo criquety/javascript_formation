@@ -1,4 +1,4 @@
-//import { EditorController } from "../controllers/EditorController.js";
+import { EditorController } from "../controllers/editorController.js";
 import { ThumbnailController } from "../controllers/thumbnailController.js";
 import { memesList, imagesList } from "../coreLib/dataInst.js";
 
@@ -8,7 +8,7 @@ export const routes= [
         pathName: '/meme',
         viewUrl: '/views/editor.html',
         pathRegex: /^\/meme(\/(?<id>\d{0,})?)?\/?$/, //extract number in patch into id group. example: /meme/125/ => id = 125
-        //controller:new EditorController(listeMemes,listeImgs)
+        controller: new EditorController( memesList, imagesList)
     },
     {
         name: 'thumb',

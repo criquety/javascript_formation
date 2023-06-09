@@ -1,5 +1,6 @@
 import { routes }  from "../config/routeConfig.js";
 import { imagesList, memesList } from "../coreLib/dataInst.js";
+import router from "../coreLib/router.js"
 
 export class ThumbnailController {
     
@@ -13,7 +14,7 @@ export class ThumbnailController {
     }
 
 
-    refresh = () => {
+    refresh=()=> {
        
         if (undefined === this.wrapper) {
             console.log("%c%s", "color:red", "Wrapper not defined");
