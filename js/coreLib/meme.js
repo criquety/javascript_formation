@@ -16,7 +16,7 @@ export class Meme {
     fontSize = 20; //number
     underline = false; //bolean
     italic = false; //boolean
-    imageID = -1; //number
+    imageId = -1; //number
     color = "#000000"; //string
     frameSizeX = 0; //number
     frameSizeY = 0; //number
