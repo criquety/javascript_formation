@@ -17,9 +17,14 @@ export class EditorController {
     #currentMeme = undefined;
     #currentImage = undefined;
 
+    //modalConfirm
+
     constructor(memes = memesList, images = imagesList) {
         this.memes = memes;
         this.images = images;
+
+        //modalConfirm = new ConfirmBox( ()=> {console.log( "CallBack OK");}, ()=> {console.log( "CallBack Cancel");});
+
     }
 
     set params( paramList) {
@@ -124,6 +129,14 @@ export class EditorController {
                     this.#currentMeme.italic = evt.target.checked;
                     this.refreshSVG();
                 });                
+
+
+                /*form.addEventListener( 'submit', (evt)=>{
+
+                    console.log ( " ------------- SUBMIT ---------- ");
+                    evt.preventDefault();
+
+                });*/
 
                 this.refresh();
             }
