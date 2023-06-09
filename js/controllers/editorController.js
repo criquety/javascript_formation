@@ -82,7 +82,7 @@ export class EditorController {
                 form['color'].value = this.#currentMeme.color;
 
                 // fill image list
-                const imageSelector = form.querySelector( 'select');
+                const imageSelector = form['image'];
                 const nullOption = imageSelector.querySelector('option[value="-1"]');
                 imageSelector.innerHTML = '';
 
