@@ -13,6 +13,9 @@ export class ThumbnailController {
         this.images = images;
     }
 
+    initView=()=>{
+        this.refresh();
+    }
 
     refresh=()=> {
        

@@ -85,7 +85,7 @@ export class RouterDOM{
         if( undefined !== this.#currentRoute.controller) {
             this.#currentRoute.controller.wrapper = RouterDOM.viewWrapper;
             this.#currentRoute.controller.params = this.#currentParams; // not defined for thumbnail controller, provide the possiblity for controller having params defined
-            this.refresh();
+            this.#currentRoute.controller.initView();
         }
     }
 
